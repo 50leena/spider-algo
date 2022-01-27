@@ -1,0 +1,25 @@
+//Fractalato
+//code
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    unsigned long long int n,u,up=1,down=0;
+    scanf("%lld",&n);
+    if(n==1)
+        printf("1");//as at start only one vertex of triangle pointing upwards.
+    else{
+        while(n--)
+        {
+            u=up;
+            up=(up*3+down)%1000000007;//counting number of triangle that points upwards.
+            down=(down*3+u)%1000000007;//counting number of triangle that points downwards.
+        }printf("%lld",up);
+    }
+    
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
