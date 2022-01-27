@@ -1,2 +1,157 @@
 algorithms code
 spider
+//1. Toffee Problem
+//CODE
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    long int n,m,temp,sum=0;
+    scanf("%ld %ld",&n,&m);//taking input.
+    int a[n];
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);//taking input.
+//sorting the input in accending order.
+    for(int i=0;i<n;++i)
+    {
+        for(int j=i+1;j<n;++j)
+        {
+            if(a[i]>a[j])
+            {
+                temp = a[i];
+                a[i] =a[j];
+                a[j] =temp;
+                
+            }
+        }
+    }
+    int c=0;
+    if(a[0]>m)
+        printf("0");//if he is unable to buy any toffee.
+    else
+    {
+        int i=0;
+        while(i<=n)
+        {
+            sum=sum+a[i];
+            if(sum<=m)
+                c++;
+            i++;
+        }
+        if(sum<=m)//this is the condition to buy max toffee.
+            printf("%ld",n);
+        else
+            printf("%d",c);
+    }
+        return 0;
+    }
+  // 2. Button Factory
+//code
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int P,Q,R,S;
+    scanf("%d %d %d %d",&P,&Q,&R,&S);//taking input.
+    
+        printf("%d",((Q<S?Q:S)-(P>R?P:R))<0?0:(Q<S?Q:S)-(P>R?P:R));//printing no. in by subtracting starting time with ending time.
+   
+       
+    return 0;
+}
+//3.Lazy Lad
+//code
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+     int q,i,y[100];     //y[100] is an array to store no. of complete rows for each room
+    long long a,s=0,count=0,j;
+    cin>>q;
+    for(i=0;i<q;i++)      //loop for q number of rooms
+    {   count=0;
+        s=0;
+        cin>>a;
+        for(j=1;;j++)
+        {
+            s+=j;
+            if(s>a)
+                break;
+            count++;
+        }
+       y[i]=count;    //count for no. of complete rows
+    }
+    for(i=0;i<q;i++)
+    {
+        cout<<y[i]<<endl;//printing number of complete rows.
+    }
+    return 0;
+}
+ 
+//4. HarshPrime
+//code
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <cstring>      
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int primecheck(int n,int *a)
+{
+    int j=0;
+    bool prime[n + 1];
+    memset(prime, true, sizeof(prime)); 
+//sorting all the prime number between 2 and n in an array.
+    for (int p = 2; p * p <= n; p++)
+    {
+        
+        if (prime[p] == true) 
+        {
+          
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+
+    for (int p = 2; p <= n; p++)
+        if (prime[p])
+            a[j++]=p;       
+    return j;
+}
+
+int main() {
+   int n,i,j,k,x,a[170],count=0;
+    cin>>n>>x;//taking input.
+
+    j=primecheck(n,a);   
+    for(i=2;i<n;i++)
+    {  
+        for(k=i+2;k<j;k++)
+        {
+        if((a[i]+a[i+1]+1)==a[k])//to cheaking sum of two prime numbers +1 is prime or not.
+        {
+            count++;
+            break;
+        }
+        }
+        
+    }//printting yes if count is greater then required otherwise no.
+    if(count>=x)
+        cout<<"YES";
+    else
+        cout<<"NO";
+    return 0;
+}
